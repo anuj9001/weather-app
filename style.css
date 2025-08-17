@@ -12,46 +12,46 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(180deg, #77d3fb 50%, #fcd6a2 50%);
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  padding: 20px;
   color: #fff;
 }
 
-::selection {
-  color: #141414;
-  background: #fff;
-}
-
 .wrapper {
-  width: 400px;
-  background: #1f1f1f;
-  border-radius: 7px;
-  border: 1px solid #fff;
-  box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.05);
+  width: 380px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .wrapper header {
   display: flex;
-  font-size: 21px;
-  font-weight: 500;
-  color: #dbc025;
-  padding: 16px 15px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  padding: 18px;
   align-items: center;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
 }
 
 header i {
   font-size: 0em;
   cursor: pointer;
-
-  margin-right: 8px;
+  margin-right: 10px;
+  transition: 0.3s;
 }
 
 .wrapper.active header i {
   margin-left: 5px;
-  font-size: 30px;
+  font-size: 26px;
 }
 
-.wrapper .input-part {
+.input-part {
   margin: 20px 25px 30px;
 }
 
@@ -61,25 +61,25 @@ header i {
 
 .input-part .info-txt {
   display: none;
-  font-size: 17px;
+  font-size: 16px;
   text-align: center;
-  padding: 12px 10px;
+  padding: 12px;
   border-radius: 7px;
   margin-bottom: 15px;
 }
 
 .input-part .info-txt.error {
-  color: #ff5252;
+  color: #ff5b5b;
   display: block;
-  background: #1f1f1f;
-  border: 1px solid #ff5252;
+  background: rgba(255, 0, 0, 0.15);
+  border: 1px solid #ff5b5b;
 }
 
 .input-part .info-txt.pending {
-  color: #5362b8;
+  color: #77d1ff;
   display: block;
-  background: #1f1f1f;
-  border: 1px solid #5362b8;
+  background: rgba(119, 209, 255, 0.15);
+  border: 1px solid #77d1ff;
 }
 
 .input-part :where(input, button) {
@@ -87,152 +87,135 @@ header i {
   height: 55px;
   border: none;
   outline: none;
-  font-size: 18px;
-  border-radius: 7px;
+  font-size: 17px;
+  border-radius: 8px;
 }
 
 .input-part input {
   text-align: center;
   padding: 0 15px;
-  border: 1px solid #333;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
 }
 
-.input-part input:is(:focus, :valid) {
-  border: 2px solid #dbc025;
+.input-part input:focus {
+  border: 2px solid #fff;
 }
 
 .input-part input::placeholder {
-  color: #666;
+  color: rgba(255,255,255,0.7);
 }
 
-.input-part .separator {
+.separator {
   height: 1px;
-  width: 100%;
   margin: 25px 0;
-  background: #333;
+  background: rgba(255,255,255,0.3);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .separator::before {
   content: "or";
-  color: #666;
-  font-size: 19px;
-  padding: 0 15px;
-  background: #1f1f1f;
+  color: #fff;
+  font-size: 15px;
+  padding: 0 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .input-part button {
   color: #fff;
   cursor: pointer;
-  background: #5362b8;
-  transition: 0.3s ease;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  transition: all 0.3s ease;
 }
 
 .input-part button:hover {
-  background: #525d9c;
+  background: linear-gradient(135deg, #185a9d, #43cea2);
+  transform: scale(1.03);
 }
 
-.wrapper .weather-part {
+.weather-part {
   display: none;
-  margin: 30px 0 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  padding: 25px 20px;
+  text-align: center;
 }
 
 .wrapper.active .weather-part {
-  display: flex;
+  display: block;
+  animation: fadeIn 0.5s ease forwards;
 }
 
-.weather-part img {
-  max-width: 125px;
+.weather-icon {
+  max-width: 120px;
+  margin-bottom: 10px;
 }
 
 .weather-part .temp {
-  display: flex;
-  font-weight: 500;
-  font-size: 72px;
-}
-
-.weather-part .temp .numb {
   font-weight: 600;
+  font-size: 70px;
+  line-height: 1;
 }
 
 .weather-part .temp .deg {
-  font-size: 40px;
-  display: block;
-  margin: 10px 5px 0 0;
+  font-size: 32px;
+  vertical-align: top;
 }
 
 .weather-part .weather {
-  font-size: 21px;
-  text-align: center;
-  margin: -5px 20px 15px;
+  font-size: 22px;
+  margin: 8px 0 15px;
+  text-transform: capitalize;
 }
 
 .weather-part .location {
-  display: flex;
-  font-size: 19px;
-  padding: 0 20px;
-  text-align: center;
-  margin-bottom: 30px;
-  align-items: flex-start;
+  font-size: 18px;
+  margin-bottom: 25px;
 }
 
-.location i {
-  font-size: 22px;
-  margin: 4px 5px 0 0;
-}
-
-.weather-part .bottom-details {
+.bottom-details {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  border-top: 1px solid #333;
-}
-
-.bottom-details .column {
-  display: flex;
-  width: 100%;
+  justify-content: space-around;
   padding: 15px 0;
-  align-items: center;
-  justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+.column {
+  text-align: center;
 }
 
 .column i {
-  color: #43affc;
-  font-size: 40px;
-}
-
-.column.humidity {
-  border-left: 1px solid #333;
+  font-size: 35px;
+  color: #ffeb3b;
 }
 
 .column .details {
-  margin-left: 3px;
+  margin-top: 5px;
 }
 
-.details .temp,
+.details .temp, 
 .humidity span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  margin-top: -3px;
 }
 
-.details .temp .deg {
-  margin: 0;
-  font-size: 17px;
-  padding: 0 2px 0 1px;
+.column p {
+  font-size: 13px;
+  opacity: 0.8;
 }
 
-.column .details p {
-  font-size: 14px;
-  margin-top: -6px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.humidity i {
-  font-size: 37px;
+/* Responsive */
+@media(max-width: 450px){
+  .wrapper {
+    width: 100%;
+  }
 }
