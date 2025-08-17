@@ -10,17 +10,19 @@ const wrapper = document.querySelector(".wrapper"),
 const apiKey = "4b777a7fffd4f471a80c50999a26aece"; 
 let api;
 
+// When user presses Enter inside input
 inputField.addEventListener("keyup", (e) => {
-  if (e.key == "Enter" && inputField.value != "") {
-    requestApi(inputField.value);
+  if (e.key === "Enter" && inputField.value.trim() !== "") {
+    requestApi(inputField.value.trim());
   }
 });
 
+// When user clicks location button
 locationBtn.addEventListener("click", () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   } else {
-    alert("Your browser not support geolocation api");
+    alert("Your browser does not support geolocation API");
   }
 });
 
@@ -53,7 +55,7 @@ function fetchData() {
 }
 
 function weatherDetails(info) {
-  if (info.cod == "404") {
+  if (info.cod === "404") {
     infoTxt.classList.replace("pending", "error");
     infoTxt.innerText = `${inputField.value} isn't a valid city name`;
   } else {
@@ -62,34 +64,29 @@ function weatherDetails(info) {
     const { description, id } = info.weather[0];
     const { temp, feels_like, humidity } = info.main;
 
-    if (id == 800) {
-      wIcon.src="./image/image1.png";
+    // ✅ FIX: Keep image paths consistent ("./images/" not mix "./image/")
+    if (id === 800) {
+      wIcon.src = "./images/image1.png";
     } else if (id >= 200 && id <= 232) {
-      wIcon.src =
-        "./images/image2.png";
+      wIcon.src = "./images/image2.png";
     } else if (id >= 600 && id <= 622) {
-      wIcon.src =
-        "./images/image3.png";
+      wIcon.src = "./images/image3.png";
     } else if (id >= 701 && id <= 781) {
-      wIcon.src =
-        "./images/image4.png";
+      wIcon.src = "./images/image4.png";
     } else if (id >= 801 && id <= 804) {
-      wIcon.src =
-        "./images/image5.png";
+      wIcon.src = "./images/image5.png";
     } else if ((id >= 500 && id <= 531) || (id >= 300 && id <= 321)) {
-      wIcon.src =
-        "./images/image6.png";
+      wIcon.src = "./images/image6.png";
     }
 
+    // Fill UI with weather details
     weatherPart.querySelector(".temp .numb").innerText = Math.floor(temp);
     weatherPart.querySelector(".weather").innerText = description;
-    weatherPart.querySelector(
-      ".location span"
-    ).innerText = `${city}, ${country}`;
-    weatherPart.querySelector(".temp .numb-2").innerText = Math.floor(
-      feels_like
-    );
+    weatherPart.querySelector(".location span").innerText = `${city}, ${country}`;
+    weatherPart.querySelector(".temp .numb-2").innerText = Math.floor(feels_like);
     weatherPart.querySelector(".humidity span").innerText = `${humidity}%`;
+
+    // Clear states
     infoTxt.classList.remove("pending", "error");
     infoTxt.innerText = "";
     inputField.value = "";
@@ -97,6 +94,7 @@ function weatherDetails(info) {
   }
 }
 
+// Back button
 arrowBack.addEventListener("click", () => {
   wrapper.classList.remove("active");
 });
